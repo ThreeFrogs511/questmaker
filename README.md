@@ -3,6 +3,8 @@
 QuestMaker est une application web de type to-do list gamifiée, inspirée de Trello et Notion, avec un thème rétro pixel.
 L’objectif : transformer la gestion de tâches en un système de quêtes, pour rendre la productivité plus ludique.
 
+
+
 🚀 Fonctionnalités
 
 ✅ Création, édition et suppression de tâches (habitudes, quêtes journalières, court-terme)
@@ -15,6 +17,8 @@ L’objectif : transformer la gestion de tâches en un système de quêtes, pour
 
 🎨 Thème visuel rétro avec police pixel
 
+
+
 🛠️ Stack technique
 
 Frontend : HTML, CSS, JavaScript
@@ -26,7 +30,10 @@ Librairies : Moment.js
 , Chart.js
 
 📸 Aperçu
+
+
 ![demo_questmaker](https://github.com/user-attachments/assets/d7a1d502-a15e-4d46-873c-ca7d204783fd)
+
 
 
 
