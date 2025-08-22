@@ -1,0 +1,26 @@
+# === Node & JS ===
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# === PHP ===
+vendor/
+composer.lock
+
+# === SQL / Config sensibles ===
+*.sql
+config.php
+.env
+
+# === Système ===
+.DS_Store
+Thumbs.db
+
+# === IDE/Éditeurs ===
+.vscode/
+.idea/
+*.swp
+
+# === Cache / Logs ===
+*.log
+.cache/
