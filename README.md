@@ -27,7 +27,7 @@ Librairies : Moment.js
 
 📸 Aperçu
 
-(Ajoute ici une capture d’écran ou un GIF du projet pour le mettre en valeur)
+(En cours)
 
 🎯 Objectifs du projet
 
