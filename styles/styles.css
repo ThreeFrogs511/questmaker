@@ -1,0 +1,1065 @@
+body {
+    background-color: white !important;
+    margin: 0;
+}
+
+
+
+/* élément à cacher par défaut */
+#barsContainer, .fa-bars {
+    display: none !important;
+}
+
+.iconToolBarMobile {
+    display: none;
+}
+.menuMobile {
+    display: none;
+}
+
+ .taskCreationWrapperMobile {
+    display: none;
+}
+
+.fa-ellipsis {
+    display: none !important;
+}
+
+/* on désactive le clic si besoin (par exemple pour éviter d'utiliser des outils de liste sans liste */
+
+.noClick, .noClick::before {
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* CSS global  */
+
+main, textarea {
+    font-family: 'Open sans', sans-serif !important;
+}
+
+textarea {
+    appearance: none;
+    resize: none;
+    overflow: hidden; 
+}
+
+.globalWrapper {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: minmax(0,1fr);
+    overflow-x: hidden;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 0 1em 0 1em;
+    padding-block: 1rem;
+}
+
+
+h1 {
+    flex: 1;
+    font-family: "Pixelify Sans", sans-serif;
+    font-weight: 400;
+    font-size: 3em;
+    padding-left: 0.5em;
+    color: black;
+    min-height: 100%;
+    cursor: pointer;
+    margin: 0;
+}
+
+h1:hover {
+    color : rgb(59, 59, 59);
+}
+
+.anim {
+    /* animation: typewriter 0.5s ease; */
+    color: white !important;
+}
+
+h2, h3 {
+     font-family: "Pixelify Sans", sans-serif;
+     font-weight: lighter;
+}
+
+header > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 1rem 0;
+}
+
+header > div:nth-child(3) {
+    display: none;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    font-family: "Pixelify Sans", sans-serif;
+    margin-left: 7rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black;
+
+}
+
+nav a:hover, .newToDoList:hover {
+    text-decoration: underline;
+}
+.newToDoList {
+    cursor : pointer;
+}
+
+.identification {
+    cursor: pointer;
+}
+
+.identification:hover {
+    text-decoration: underline;
+}
+
+ nav span {
+        text-align: center;
+    }
+
+/* inscription */
+
+.signUpBox {
+    border: none;
+    background-color: #315257;
+    color: white;
+    width: 30dvw;
+    /* padding: 1rem; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.signUpBox::backdrop {
+  /* background-color: white; */
+  /* content:"Questmaker" */
+  /* animation: backdrop 0.5s linear infinite; */
+   background: linear-gradient(360deg,rgba(0, 79, 110, 1) 0%, rgba(181, 200, 235, 1) 100%);
+}
+
+/* @keyframes backdrop {
+    100% {background: linear-gradient(360deg,rgba(181, 200, 235, 1)  0%, rgba(0, 79, 110, 1) 100%)}
+
+    
+} */
+
+
+.signUpBox form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+}
+
+.signUpBox label {
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+.signUpBox div:not(div:has(span)) {
+    display: flex;
+    flex-direction: column;
+    padding:.5rem 0;
+    
+}
+
+.signUpBox input {
+    color: white;
+    font-size: 1rem;
+   
+}
+.signUpBox input:not(input[type="submit"]) {
+    padding: .5rem;
+    margin-top: .5rem;
+    background-color: #47737a;
+    border: none;
+}
+
+.signUpBox input:focus {
+    outline: none;
+}
+
+.signUpBox input[type="submit"] {
+    padding: .5rem;
+    margin-top: 2rem;
+    background-color: #2e4447;
+    border: none;
+    box-shadow: 2px 2px 2px black;
+}
+
+.signUpBox input[type="submit"]:hover {
+    cursor:pointer;
+    background-color: oklch(0.5935 0.0497 208.53);
+}
+
+.signUpBox span {
+    cursor: pointer;
+}
+
+.signUpBox span:hover {
+    text-decoration: underline;
+}
+
+.signUpBox div:has(span) {
+    margin-top: 2rem;
+}
+
+.msgErreur p {
+    margin: 0;
+    font-size: .75rem;
+}
+
+.msgEnBas {
+    margin-top: .5rem;
+}
+.retourEnArriere {
+    text-align: center;
+    margin-top: .5rem;
+}
+
+.retourEnArriere:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.alertBoxExpired {
+    background-color: #2b484d;
+    color: white;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+.alertBoxExpired > div {
+    font-size: 3rem;
+}
+
+.alertBoxExpired ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.alertBoxExpired .closeAlert {
+    margin-top: 2rem;
+    background-color: #47737a;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: .5em 1em;
+    box-shadow: 1px 1px 1px black;
+    max-height: 50dvh;
+}
+
+.lateTask {
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.lateTask:hover {
+    background-color: #21393d;
+   
+}
+
+.closeAlert:hover {
+    background-color: #33555a;
+}
+/* to do list */
+.champToDo, .champNewToDo {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow-x: hidden;
+    border-bottom: 2px solid #8eaaaf;
+}
+
+
+/* titre */
+.titleList {
+    display: block;
+    border: none;
+    max-width: 100%;
+    width: 100%;
+    height: 50%;
+    background-color: transparent;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    border-right: 1px solid white;
+    padding-left: 1rem;
+    color: white;
+  
+}
+
+
+.titleList::placeholder {
+    color: rgba(185, 190, 190, 0.342) !important;
+    font-style: italic;
+}
+.titleList:focus {
+    outline: none;
+}
+
+.titleList:hover {
+    cursor:auto;
+    
+}
+
+.titleList::placeholder {
+    color: white;
+}
+
+.titleListHightLight {
+    animation: highlightTitleList 0.5s linear;
+}
+
+@keyframes highlightTitleList {
+    50% {background-color: oklch(64.609% 0.0565 208.111)}
+    100% {background-color: oklch(0.5935 0.0497 208.53)}
+}
+
+
+/* tool bar */
+.toolBar {
+    background-color: #47737a;
+    height: 4em;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr;
+    overflow-y: hidden;
+    color: white;
+    max-width: 100%;
+
+}
+
+
+.fa-gear {
+    display: none !important;
+}
+
+.toolBar > div:first-child {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.toolBar > div:first-child:hover {
+    background-color: oklch(0.5935 0.0497 208.53);
+}
+
+
+.iconToolBar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    margin-left: 1rem;
+    
+}
+
+.fa-filter {
+    cursor:pointer;
+    padding: .5em;
+    anchor-name: --mon-ancre;
+}
+
+.fa-filter:not(.no-hover):hover {
+    background-color: #8eaaaf;
+    color: rgba(0, 0, 0, 0.555);
+}
+
+
+
+.hidden {
+    height: 0px !important;
+    overflow-y: hidden;
+    transition: height 0.5s ease;
+}
+
+.dialogHidden {
+    display: none;
+}
+
+
+
+.menuFilter {
+    position: absolute;
+    top: anchor(--mon-ancre bottom);
+    width: 30vw;
+    background-color: #47737a;
+    text-shadow: 1px 1px 2px black;
+    height: 10rem;
+    transition: height 0.5s ease;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 1fr);
+}
+
+.menuFilter div {
+    cursor: pointer;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.menuFilter div:hover {
+    background-color: oklch(0.5935 0.0497 208.53);
+}
+
+.filterChoisiEnBleu{
+    background-color: rgb(38, 149, 214) !important;
+}
+
+.hiddenBtn {
+    display: none;
+}
+
+.filterChoisiEnBleu:hover {
+    background-color: #3b6369;
+}
+.fa-plus {
+    cursor:pointer;
+    padding: .5em;
+}
+
+.fa-plus:not(.no-hover):hover {
+    background-color: #8eaaaf;
+    color: rgba(0, 0, 0, 0.555);
+   
+}
+
+.fa-arrow-up-z-a {
+    cursor: pointer;
+    padding: .5em;
+}
+
+.fa-arrow-up-z-a:not(.no-hover):hover {
+    background-color: #8eaaaf;
+    color: rgba(0, 0, 0, 0.555);
+}
+
+.fa-trash {
+    cursor: pointer;
+    padding: .5em;
+}
+
+.fa-trash:not(.no-hover):hover {
+    background-color: #8eaaaf;
+    color: rgba(0, 0, 0, 0.555);
+}
+
+.on {
+    color: rgb(116, 235, 229);
+}
+
+.on:hover {
+    color: rgb(116, 235, 229) !important;
+}
+
+.searchBarContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.fa-rectangle-xmark {
+    padding-right: .5rem;
+    opacity: 0;
+}
+
+.fa-rectangle-xmark:hover{
+    color: rgb(116, 235, 229);
+}
+.searchBar {
+    display: flex;
+    width: 40px;
+    box-sizing: border-box;
+    background-color: #2b484d;
+    padding: 0.75em;
+    border-radius: 22px;
+    max-height: 40px;
+    transition: width 0.5s ease, background-color 0.2s ease;
+    margin-right: 1rem;
+}
+
+.searchOpen {
+    width: 100%;
+    border-radius: 22px;
+}
+
+
+.searchInput {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.search:focus {
+    outline: none;
+}
+.search {
+    display: block;
+    background-color: transparent;
+    color: white;
+    width: 100%;
+    max-height: 100%;
+    border: none;
+}
+
+.search::placeholder {
+    color: white;
+}
+
+.searchIcon {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: none;
+    max-height: 100%;
+    color: white;
+}
+
+
+.aucuneListeTrouvee {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    font-size: 1.5rem;
+    margin-block: 3rem;
+}
+
+.aucuneListeTrouvee div {
+    font-size: 3rem;
+}
+
+.tutoCreationListe {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 5rem;
+    anchor-name: --tutoCreationListe;
+}
+
+.tutoCreationListe span {
+    font-size: 2rem !important;
+}
+
+/* task */
+
+.msgAucuneListe {
+    font-size: 2rem;
+    margin-top: 5rem;
+}
+
+.msgAucuneTache {
+    font-size: 2rem;
+    margin-top: 5rem;
+    color: black !important;
+}
+
+.msgAucuneTache p {
+    margin: 0;
+    text-align: center;
+}
+
+.msgAucuneListe p {
+    margin: 0;
+    text-align: center;
+}
+
+.msgAucuneListe > div, .msgAucuneTache > div{
+    font-size: 4rem;
+    text-align: center;
+} 
+
+.msgAucuneListe > div {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.taskSetUpContainer {
+    /* border-bottom: 1px solid #8eaaaf; */
+    height: 3rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+}
+
+.taskInput {
+    height: 100%;
+    width: 100%;
+    font-size: 1.5rem;
+    border: none;
+    
+}
+
+.taskInput:focus {
+    outline: none;
+}
+
+.taskInput::placeholder {
+    padding-left: .5rem;
+}
+
+.toDoListContainer  {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+   
+}
+
+.toDoListContainer ~ li {
+    border-bottom: 1px solid #8eaaaf;
+    border-top: 1px solid #8eaaaf;    
+}
+
+.maPremiereListe > button{
+    border: none;
+    padding: 1rem 1.5rem;
+    background-color: #568991;
+    font-size: 1.5rem;
+    font-family: 'Pixelify Sans', 'sans-serif';
+    color: white;
+    margin-top: 1rem;
+    border-radius: 50px;
+    cursor : pointer;
+
+}
+
+.task {
+    border-bottom: 1px solid #8eaaaf;
+    display: grid;
+    grid-template-columns: 1fr 3fr minmax(0, 1fr) 1fr;
+    justify-content: center;
+    padding: .5rem 0;
+    background-color: oklch(100% 0.00011 271.152) ;
+    
+
+}
+
+.task p {
+    font-size: 1.5em;
+}
+
+.task:hover {
+    background-color: oklch(92.225% 0.0186 209.718);
+}
+
+@keyframes highlightTask {
+    50% {background-color: oklch(68.891% 0.02792 211.815)}
+    100% {background-color: oklch(0.8249 0.0273 211.06)}
+}
+
+#menuMobileTask {
+    display: none;
+    color: white;
+}
+
+.toDoListContainer textarea  {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.taskDone {
+    color: grey;
+    text-decoration: line-through;
+    font-style: italic;
+    pointer-events: none;
+}
+
+.box {
+    display: inline-block;
+    justify-content: center;
+    border: 1px solid black;
+    font-size: 1.5em;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: auto;
+    cursor: pointer;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.box:hover {
+    border: 1px solid black;
+    transform:scale(1.1);
+    
+}
+
+.boxGreen {
+    background-color: green;
+}
+
+
+.delete {
+    width: fit-content;
+    color: #47737a;
+    text-align: center;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: auto;
+    
+}
+
+.delete:hover {
+    color: #8a0718;
+}
+
+.deadline {
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    height: fit-content;
+    background-color: #47737a;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+    padding-inline: auto;
+    border-radius: 5px;
+    border: none;
+    cursor : pointer;
+}
+
+
+.wrongDate {
+    box-shadow: 1px 1px 8px 2px #8a0718;
+    background-color: grey;
+    color: #8a0718;
+}
+
+.deadline:hover {
+    background-color: oklch(0.5935 0.0497 208.53) !important;
+}
+
+
+
+.mainDashboard {
+    background-color: #47737a;
+    width: 90%;
+    margin-inline: auto;
+    border-radius: 25px;
+    border: 1px solid rgb(230, 228, 228);
+}
+.mainDashboard > h2 {
+    margin: 1rem 0 1rem 3rem;
+    font-size: 2rem;
+    font-family: "Pixelify Sans", sans-serif;
+    font-weight: lighter;
+    color: white;
+    min-height: 3rem;
+    max-height: 3rem;
+    vertical-align: center;
+}
+
+@property --slide {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+.taskShaking {
+    animation : shakeItOff 0.1s linear 1;
+}
+
+@keyframes shakeItOff {
+    25% {transform: translateX(10px)}
+    50% {transform: translateX(25px)}
+    75% {transform: translateX(10px);}
+    100% {transform: translateX(0px);}
+
+}
+
+.mainDashboard {
+    height: 100%;
+    
+}
+
+.dashboardContainer {
+    width:95%;
+    height: 100%;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0,1fr));
+    grid-template-rows: 25rem 40rem;
+    grid-template-areas: 
+    "tachesNonFaites tachesNonFaites tachesNonFaites tachesNonFaites tachesNonFaites "
+    "tachesFaites tachesFaites tachesFaites tachesFaites tachesFaites ";
+    /* "tachesFaites tachesFaites tachesFaites tachesFaites tachesFaites"; */
+    row-gap: 3rem;
+    margin-top: 1rem !important;
+    color: white;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.tachesNonFaites, .tachesFaites, .toutesLesListes {
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid rgb(207, 195, 195);
+}
+
+.toolbarDashboard{
+    color: black;
+    padding: .75rem .25rem;
+    border-radius: 25px 25px 0px 0px;
+}
+
+.toolbarDashboard h3 {
+    margin: 0;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+    width: 40%;
+    padding-bottom: .5rem;
+}
+
+.tachesNonFaites {
+    grid-area: tachesNonFaites;
+}
+
+
+.tachesNonFaites > div:nth-child(2) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100% - 90px)
+}
+
+.tachesNonFaites ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: 85%;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.sousContainerNonFaites {
+    display: flex;
+    gap: .5rem;
+    position: relative;
+    left: var(--slide);
+    transition: left 0.5s linear;
+    width: 924px;
+
+}
+
+.tachesFaites > div:nth-child(2) {
+     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100% - 90px)
+}
+
+.tachesFaites ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: 85%;
+    overflow: hidden;
+    height: 100%;
+}
+
+
+.sousContainerFaites {
+    width: 100%;
+    max-height: 100%;
+}
+
+#myChart {
+   aspect-ratio: 16/9;
+
+}
+
+.taskDashboard, .listDashboard, .taskDashboardFaites {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    list-style-type: none;
+    max-height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    background-color: white;
+    border-radius: 30px;
+    border: 1px solid rgb(230, 228, 228);
+    color: black;
+    overflow: hidden;
+    transition: background-color 0.5s linear;
+}
+
+
+.wrapperDeadlineTask {
+    color: white;
+    padding: .5rem;
+    max-height: 20%;
+    border-radius: 5px;
+    max-width: 100%;
+    background-color: #47737a;
+}
+
+.fa-clock {
+    padding-left: .25rem;
+    padding-right: .5rem;
+}
+
+
+.wrapperBodyTask {
+    min-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: .25rem;
+}
+
+.wrapperBodyTask div:nth-child(1) {
+    anchor-name: --voir;
+}
+
+
+.wrapperBodyTask > div:first-child {
+    max-width: 100%;
+    min-height: 70%;
+    max-height: 70%;
+    border-radius: 20px;
+
+}
+
+.taskDashboard h4, .taskDashboardFaites h4 {
+    overflow-wrap: break-word !important;
+    margin-block: auto;
+    max-width: 100%;
+    margin-top: 1rem;
+    
+}
+
+.taskDashboard p, .taskDashboardFaites p {
+    margin: 0;
+}
+
+.taskDashboard:hover, .listDashboard:hover, .taskDashboardFaites:hover {
+   background-color: rgb(245, 245, 245);
+   transition: transform 0.5s linear;
+   cursor: pointer;
+}
+
+.taskDashboard:hover :not(.voirPlus, .fa-eye) {
+    filter: blur(1px);
+    
+}
+.voirPlus {
+    /* background-color: red; */
+    min-width: 150px;
+    position: absolute;
+    position-anchor: --voir;
+    top: calc(anchor(bottom) - 50px);
+    padding: 0 1rem 0 2.5rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskDashboard:hover .voirPlus {
+    animation: eyeGrowing 0.2s linear 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes eyeGrowing {
+    100% {transform: scale(1.5)}
+    
+}
+
+
+.fa-arrow-left {
+    color: black;
+    font-size: 2rem;
+    opacity: 0;
+}
+
+.fa-arrow-right {
+    color: black;
+    font-size: 2rem;
+    opacity: 0;
+    
+}
+
+@keyframes arrowMovementRight {
+    25% {transform:translateX(5px)}
+    50% {transform:translateX(10px)}
+    75% {transform: translateX(5px)}
+    100% {transform: translateX(0);}
+}
+
+@keyframes arrowMovementLeft{
+     25% {transform:translateX(-5px)}
+    50% {transform:translateX(-10px)}
+    75% {transform: translateX(-5px)}
+    100% {transform: translateX(0);}
+}
+
+
+
+.tachesFaites {
+    grid-area: tachesFaites;
+   
+}
+
+.taskDashboardFaites h4 span {
+    text-decoration: line-through;
+    font-style: italic;
+    color: grey;
+}
+
+.taskDashboardFaites h4:hover::after {
+    content:" ✅";
+    text-decoration: none !important;
+    font-style: normal;
+}
+.toutesLesListes {
+    grid-area: listes;
+}
+
+.toutesLesListes > div:nth-child(2) {
+     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100% - 90px)
+}
+
+.toutesLesListes ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: 85%;
+    overflow-x: hidden;
+    height: 100%;
+}

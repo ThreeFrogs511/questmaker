@@ -1,0 +1,654 @@
+
+/* mobile et tablette */
+@media screen and (max-width:780px) {
+
+    
+
+    /* log in  et pop up alert après connexion*/
+
+    .signUpBox {
+        width: 100%;
+    }
+
+    .alertBoxExpired {
+        width: 70dvw;
+    }
+
+    /* index */
+    .globalWrapper {
+        padding: 3rem 0;
+    }
+
+    .no-scroll {
+        overflow-y: hidden !important;
+    }
+  
+    main {
+        min-height: 100vh;
+    }
+
+    header {
+        display: none;
+    }
+
+    .menuMobile {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        z-index: 1;
+        height: 8dvh;
+        max-width: 100dvw;
+        width: 100%;
+        background-color: #47737a;
+        justify-content: space-around;
+        padding: .5rem 0 0 0;
+    }
+    
+    .menuMobile span, .menuMobile a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+        color: white;
+        justify-content: center;
+        text-decoration: none !important;
+    }
+
+    .menuMobile span i {
+        padding-bottom: .5rem;
+    }
+
+    .menuMobile a i {
+        padding-bottom: .5rem;
+    }
+
+
+    .searchBarContainer {
+        display: none;
+    }
+
+    .toolBar {
+        display: grid;
+        height: 3rem;
+        grid-template-columns: 2fr 1fr;
+        overflow: hidden;
+    }
+
+    
+
+    .champToDo {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        /* height: 5rem; */
+        border-bottom: none;
+    }
+
+    .toolBar > div:first-child:hover {
+        background-color: #47737a;
+    }
+
+
+    .titleList {
+        font-size: 1rem;
+        pointer-events: none;
+    }
+
+  
+
+    .taskSetUpContainer {
+        display: none;
+
+    }
+
+    /* .toolBar > div input {
+        font-size: 1rem;
+        padding-left: .5rem;
+    } */
+
+    #barsContainer {
+        display: flex !important;
+        align-items: center;
+    }
+    
+    .fa-bars {
+        display: flex !important;
+        justify-content: center;
+        /* align-items: center; */
+        font-size: 1.5rem;
+        /* margin-right: 2rem; */
+        anchor-name: --menu-hamburger;
+        width: 100%;
+    }
+
+    .fa-barsOn {
+        color:aqua;
+    }
+
+
+   
+    .iconToolBar {
+        display: none;
+    }
+
+    .iconToolBarMobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 0;
+        width: 50dvw;
+        position: fixed;
+        top: anchor(--menu-hamburger bottom);
+        right: 0;
+        /* bottom: 0; */
+        background-color: #47737a;
+        height: 0px;
+        overflow: hidden;
+        transition: height 0.2s ease;
+        margin: 0;
+        z-index: 2;
+        color: white;
+
+    }
+
+    .iconToolBarMobile div {
+        padding-block: .5rem;
+    }
+
+    .iconToolBarMobile div:active {
+        background-color: #568991;
+    }
+
+    .iconToolBarOpen {
+        height: 300px;
+    }
+
+    .fa-arrow-up-z-a, .fa-trash, .fa-plus, .fa-filter{
+        cursor: none;
+    }
+
+    .fa-pen-to-square {
+        padding: .5rem;
+    }
+
+    .toDoListContainer {
+        height: 100%;
+    }
+
+    .fa-list {
+        padding: .5rem;
+    }
+
+    /* page pour créer une tâche sur mobile */
+
+  
+    .popUpMobile {
+        position: fixed;
+        width:0px;
+        height: 100vh;
+        left:0;
+        overflow: hidden;
+        transition: width 0.1s ease;
+        z-index: 999;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+
+    .popUpMobileOpen {
+        width: 100vw;
+    }
+
+    .popUpMobile > div .fa-xmark {
+        font-size: 2.5rem;
+    }
+
+     .popUpMobile > div:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        padding-right: 4rem;
+        margin-block: 2.5rem;
+    }
+    .popUpMobile > div:nth-child(2):not(.rubriqueModifier){
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      
+    }
+
+    .popUpMobile > div:nth-child(3):not(.rubriqueDeadline):not(.containerMsgErreur){
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+    }
+
+       
+    .popUpMobile h3:not(.rubriqueModifier h3):not(.rubriqueDeadline h3) {
+        font-size: 2rem;
+        width: 90%;
+        text-align: center;
+        margin-block: 2rem 0;
+    }
+
+    .popUpMobile div:nth-child(4) {
+        /* background-color: red; */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        margin-bottom: 5rem;
+    }
+
+    #entryField {
+        padding: 0 .5rem;
+        font-size: 2rem;
+        border: none;
+        appearance: none;
+        width: 90%;
+        margin-inline: auto;
+        /* background-color: red; */
+        height: 10rem;
+        padding-inline: 0;
+        margin-top: 3rem;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+     #entryInputTypeSearchField {
+        padding: 1rem;
+        font-size: 2rem;
+        width: 95%;
+        margin-inline: auto;
+        /* padding-inline: 0; */
+        margin-top: 2.5rem;
+        white-space: pre-wrap;
+    }
+
+    #entryField::placeholder {
+        font-size: 2rem;
+    }
+
+    #entryField:focus {
+        border: none !important;
+        appearance: none !important;
+        outline: 0;
+    }
+
+    .submitBtnMobile {
+        border: none;
+        width: 90%;
+        padding: 1rem 1.5rem;
+        background-color: #568991;
+        font-size: 1.5rem;
+        font-family: 'Pixelify Sans', 'sans-serif';
+        color: white;
+        border-radius: 50px;
+    }
+
+      .submitBtnMobile:active {
+        border: none;
+        width: 90%;
+        padding: 1rem 1.5rem;
+        background-color: #6ea2aa;
+        font-size: 1.5rem;
+        font-family: 'Pixelify Sans', 'sans-serif';
+        color: white;
+        border-radius: 50px;
+    }
+
+    .deadline-picker-container {
+        position: relative;
+        border: 1px solid #47737a;
+        width: 90% !important;
+        height: 4rem;
+        padding-inline: 1rem;
+        box-sizing: border-box;
+        border-radius: 50px;
+    }
+
+    .btn-deadline-mobile {
+        appearance: none;
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        font-size: 1.5rem;
+        font-family: 'Open sans', sans-serif !important;
+        text-align: center;
+    }
+
+    .popUpMobile input[type="date"] {
+        font-family: 'Open sans', sans-serif !important;
+        /* box-sizing: border-box; */
+        color: black !important;
+    }
+
+    .popUpMobile input[type="date"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+    }
+
+    /* page pop up pour modification de tâche */
+    .rubriqueDeadline {
+        width: 100%;
+    }
+
+    .rubriqueModifier h3 {
+        margin: 0;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .supprimerTacheBtnMobile {
+        border: none;
+        width: 90%;
+        padding: 1rem 1.5rem;
+        background-color: #ac1616;
+        font-size: 1.5rem;
+        font-family: 'Pixelify Sans', 'sans-serif';
+        color: white;
+        border-radius: 50px;
+    }
+    /* sous menu filtre mobile */
+
+    .choixFiltreMobile {
+        height: 40vh;
+        width: 70vw;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        border: none;
+        justify-content: space-around;
+    }
+
+    .choixFiltreMobile::backdrop {
+        backdrop-filter: brightness(50%);
+        -webkit-backdrop-filter: brightness(50%);
+    }
+    
+
+    .choix {
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .filtreChoisi {
+        background-color: rgb(218, 230, 241);
+    }
+
+    #groupe-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: .5rem;
+    }
+
+    #groupe-btn button {
+        width: 50%;
+        height: 100%;
+        padding: .5rem 1rem;
+        
+    }
+
+    #groupe-btn button:first-child {
+        border: none;
+        background-color: #568991;
+        color: white;
+    }
+
+     #groupe-btn button:last-child{
+        border: 1px solid red;
+        background-color: transparent;
+        color: red;
+    }
+
+    /* pop up recherche de liste */
+    
+    .containerMsgErreur {
+        max-height: fit-content;
+    }
+    /*  */
+    .task {
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    .box {
+        padding: .25rem;
+        aspect-ratio: 1/1;
+    }
+
+    .task .taskBody, .taskDone {
+        width: 100%;
+        max-height: 100%;
+        font-size: 1rem!important;
+        font-style: normal;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        padding-right: 1rem;
+        box-sizing: border-box;
+        
+
+    }
+
+
+    .taskBody {
+        pointer-events: none;
+    }
+    .deadline {
+        display: none;
+    }
+
+    .fa-ellipsis {
+        display: block !important;
+        padding: 1rem;
+        width: 100%;
+        border-left: 1px solid rgb(235, 238, 241);
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .activated {
+        anchor-name: --option-mobile;
+    }
+
+
+    .fa-circle-xmark {
+        display: none !important;
+    }
+
+    .msgAucuneListe  {
+        margin-block: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10rem;
+    }
+
+    .msgAucuneTache {
+        margin-block: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10rem;
+    }
+
+    .msgAucuneListe p {
+        margin: 0;
+        width: 90%;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .msgAucuneTache p {
+        margin: 0;
+        width: 90%;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .msgAucuneListe > div {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .msgAucuneTache > div {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    /* dashboard */
+
+    .mainDashboard {
+        margin: 0;
+        width: 100%;
+        background-color: white;
+        border: 0;
+
+    }
+    .mainDashboard h2 {
+        margin: 0;
+        color: black;
+        font-size: 1.2rem;
+        width: 90%;
+        margin: 1rem auto;
+        overflow-wrap: break-word;
+    }
+
+    .dashboardContainer {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 25rem 25rem;
+    }
+
+    .tachesFaites, .tachesNonFaites {
+        border: 1px solid rgb(201, 195, 195);
+    }
+
+    .sousContainerNonFaites {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+
+}
+
+.taskDashboard {
+    scroll-snap-align: center;
+}
+
+.fa-arrow-right, .fa-arrow-left {
+    display: none;
+    
+}
+
+.tachesNonFaites h3, .tachesFaites h3 {
+    width: 70%;
+    margin-inline: auto !important;
+    font-size: 1rem;
+    text-align: center;
+
+}
+
+.sousContainerFaites {
+    height:80% !important;
+}
+
+
+
+}
+
+/* très petits écrans pour diminuer taille de certains éléments */
+@media screen and (max-width: 280px) {
+    .taskBody, .taskDone {
+        height:5rem;
+    }
+    
+}
+
+
+
+/* tablette et petit pc */
+@media screen and (min-width: 551px) and (max-width:900px) {
+
+    header {
+        grid-template-columns: 1fr 2fr;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+
+    header nav a, nav span {
+        font-size: 1rem;
+    }
+    
+    nav span {
+        text-align: center;
+    }
+
+    .box {
+        padding: .5rem;
+        aspect-ratio: 1/1;
+    }
+
+    /* dashboard */
+
+     .mainDashboard {
+        margin: 0;
+        width: 100%;
+        background-color: white;
+        border: 0;
+
+    }
+    .mainDashboard h2 {
+        margin: 0;
+        color: black;
+        font-size: 1.2rem;
+        width: 90%;
+        margin: 1rem auto;
+        overflow-wrap: break-word;
+    }
+
+    .tachesFaites, .tachesNonFaites {
+        border: 1px solid rgb(201, 195, 195);
+    }
+
+    .sousContainerNonFaites {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+
+}
+
+.taskDashboard {
+    scroll-snap-align: center;
+}
+
+.fa-arrow-right, .fa-arrow-left {
+    display: none;
+    
+}
+
+.tachesNonFaites h3, .tachesFaites h3 {
+    width: 100%;
+   
+}
+
+.sousContainerFaites {
+    height:fit-content;
+}
+}
