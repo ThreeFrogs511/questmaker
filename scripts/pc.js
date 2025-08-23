@@ -15,7 +15,6 @@ let btnPlus = document.querySelector(".fa-plus")
 const user_id = JSON.parse(window.localStorage.getItem("user_id"));
 
 //liste globale pour reset les écouteurs d'event au besoin
-let currentBoxHandler = null;
 let pikadayDate = null;
 let picker = null;
 let supprimer = '';

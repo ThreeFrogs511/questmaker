@@ -23,17 +23,6 @@ export class generateurDeTache {
         this.user_id = user_id;
     }
 
-    async completion() {
-
-        const response = await fetch("./php/taskStatus.php", {
-                    method:"POST",
-                    headers:{"content-type": "application/JSON"},
-                    body: JSON.stringify({id:this.todo_id, done: this.done, idTitle:this.liste_id, userId:this.user_id})
-                })
-        const feedback = await response.json();
-        window.localStorage.setItem("liste", JSON.stringify(feedback));
-    }
-
     formaterDeadline(param) {
         if (param === null) { 
             return "Aucune deadline";
@@ -44,7 +33,7 @@ export class generateurDeTache {
                 jour: semaine[dateObjet.getDay()],
                 mois: mois[dateObjet.getMonth()]
             } 
-            return`${constructeurDeDateFR.jour} ${constructeurDeDateFR.date} ${constructeurDeDateFR.mois}`
+            return `${constructeurDeDateFR.jour} ${constructeurDeDateFR.date} ${constructeurDeDateFR.mois}`
         }
     }
 
@@ -84,14 +73,7 @@ export class generateurdeListe {
         this.user_id = user_id;
         this.tableauDeTaches = tableauDeTaches;
     }
-    listerLesTaches() {
-        this.tableauDeTaches.forEach(tache => {
-            tache.insertionDeLaTacheDansLaListe();
-        })
-        
-
-        
-    }
+    
 }
 
 
@@ -203,7 +185,6 @@ async function inscription() {
         })
 };
     
-
 
 
 async function connexion(signUpBox) {
@@ -324,13 +305,13 @@ export async function afficherListeRecenteParDefaut() {
                 document.querySelector(".titleList").value = listeRecente.liste_titre;
             // s'il n'y a aucune liste
             } else if (listeRecente.length === 0 || listeRecente === undefined) {
-               document.querySelector(".titleList").value = '';
-                document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
+                document.querySelector(".titleList").value = '';
+                // document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
                 creationToutePremiereListe();
             // s'il y a au moins une liste et au moins une tâche
             } else {
-            await générerListe(listeRecente)
-            window.localStorage.setItem("liste", JSON.stringify(listeRecente))    
+                await générerListe(listeRecente);
+                window.localStorage.setItem("liste", JSON.stringify(listeRecente))    
             }
            
         } else {
@@ -347,6 +328,7 @@ export async function afficherListeRecenteParDefaut() {
 
 // quand l'user n'a pas encore créé de liste, un bouton lui permet de le guider, diff selon mobile ou pc
 export function creationToutePremiereListe() {
+    document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
     if (document.querySelector(".maPremiereListe")) {
         // on désactive les clics inutiles tant que l'user n'a pas crée de liste
         interdireLeClickQuandAucuneListe();
