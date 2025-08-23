@@ -42,7 +42,7 @@
             <main>
                 <section class="champToDo">
                     <div class="toolBar">
-                        <div><input type="text" class="titleList" maxlength="25" placeholder="Ma nouvelle liste" ></div>
+                        <div><input type="text" class="titleList" maxlength="25" placeholder="Ma nouvelle liste" value=""></div>
                         <div class="iconToolBar">
                             <i class="fa-solid fa-filter"></i>
                                 <div class="menuFilter hidden">

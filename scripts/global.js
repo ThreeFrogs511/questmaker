@@ -13,10 +13,74 @@ export const msgInfo = {
 }
     
 
+// futur template pour intégrer la POO dans mon code afin d'alléger le contenu et simplifier la création
+export class generateurDeTache {
+    constructor(todo_body, done = 0, deadline, liste_id, user_id) {
+        this.todo_body = todo_body;
+        this.done = done;
+        this.deadline = deadline;
+        this.liste_id = liste_id;
+        this.user_id = user_id;
+    }
+
+    formaterDeadline(param) {
+        if (param === null) { 
+            return "Aucune deadline";
+        } else {
+            let dateObjet = new Date(param);
+            let constructeurDeDateFR = {
+                date : dateObjet.getDate(),
+                jour: semaine[dateObjet.getDay()],
+                mois: mois[dateObjet.getMonth()]
+            } 
+            return `${constructeurDeDateFR.jour} ${constructeurDeDateFR.date} ${constructeurDeDateFR.mois}`
+        }
+    }
+
+    insertionDeLaTacheDansLaListe() {
+        document.querySelector(".toDoListContainer").innerHTML === msgInfo.msgAucuneTache && (document.querySelector(".toDoListContainer").innerHTML = '');
+        let containerDeTache = document.createElement("li");
+        containerDeTache.classList.add("task");
+        containerDeTache.setAttribute("data-id", this.todo_id);
+        containerDeTache.innerHTML = `
+        <span class="${this.done === 1 ? "box boxGreen" : "box"}" data-status="${this.status}"></span>
+        <textarea class="taskBody" maxlength="50" type="text">${this.todo_body}</textarea>
+        <input type="button" class="deadline" data-id="${this.todo_id}" 
+            data-date-formatted = "${this.deadline}"
+            value="${this.formaterDeadline(this.deadline)}">
+        <i class="fa-regular fa-circle-xmark delete hidden"></i>
+        <i class="fa-solid fa-ellipsis"></i>`;
+        document.querySelector(".toDoListContainer").appendChild(containerDeTache);
+        document.querySelector(".taskInput").value = "";
+    }
+
+   async envoiTacheVersBDD() {
+        const response = await fetch("./php/todo.php", {
+            method: "POST",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({todo_body:this.todo_body, titleId: this.liste_id, deadline: this.deadline, user_id:this.user_id})
+        });
+        const feedback = await response.json();
+        feedback[1] ? window.localStorage.setItem("liste", JSON.stringify(feedback[0])) : console.log("erreur!");
+        this.todo_id = feedback[0].todo_id;
+    }
+}
+
+export class generateurdeListe {
+    constructor(liste_titre, liste_id, user_id, tableauDeTaches) {
+        this.liste_titre = liste_titre;
+        this.liste_id = liste_id;
+        this.user_id = user_id;
+        this.tableauDeTaches = tableauDeTaches;
+    }
+    
+}
+
+
+
 // lancement
 connexionOuDeconnexion();
 
-console.log(JSON.parse(window.localStorage.getItem("session")))
 // système de connexion / inscription
 
 export function connexionOuDeconnexion() {
@@ -123,7 +187,6 @@ async function inscription() {
     
 
 
-
 async function connexion(signUpBox) {
         signUpBox.innerHTML =  `<h3>Connectez-vous ci-dessous</h3>
         <div class="msgErreur"></div>
@@ -192,8 +255,8 @@ export async function générerListe(liste) {
         if (list.todo_body !== null) {
             taskContainer.setAttribute("data-id", list.todo_id) // on insère l'id unique de la tâche afin de l'identifier plus tard
             taskContainer.innerHTML = `
-                <span class="box"></span>
-                <textarea class="taskBody" maxlength="50" type="text">${list.todo_body}</textarea>
+                <span class="box" data-status="${list.done}"></span>
+                <textarea class="taskBody" maxlength="50" type="text">${list.todo_body} </textarea>
                 <input type="button" class="deadline" data-id="${list.todo_id}" data-date-formatted = ${list.deadline} value="">
                 <i class="fa-regular fa-circle-xmark delete hidden"></i>
                 <i class="fa-solid fa-ellipsis"></i>` 
@@ -235,23 +298,25 @@ export async function afficherListeRecenteParDefaut() {
             }) ;
             // on récupère la liste la plus récente
             const listeRecente = await response.json();
+            // console.log(listeRecente);
             // s'il n'y a aucune tâche dans la liste
              if (listeRecente.todo_body === null) {
                 document.querySelector(".toDoListContainer").innerHTML = msgInfo.msgAucuneTache;
                 document.querySelector(".titleList").value = listeRecente.liste_titre;
             // s'il n'y a aucune liste
             } else if (listeRecente.length === 0 || listeRecente === undefined) {
-               document.querySelector(".titleList").value = '';
-                document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
+                document.querySelector(".titleList").value = '';
+                // document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
                 creationToutePremiereListe();
             // s'il y a au moins une liste et au moins une tâche
             } else {
-            await générerListe(listeRecente)
-            window.localStorage.setItem("liste", JSON.stringify(listeRecente))    
+                await générerListe(listeRecente);
+                window.localStorage.setItem("liste", JSON.stringify(listeRecente))    
             }
            
         } else {
-            const listeRecente = JSON.parse(window.localStorage.getItem("liste"))
+            const listeRecente = JSON.parse(window.localStorage.getItem("liste"));
+            console.log(listeRecente);
             !listeRecente[0].todo_body && (listeRecente[0].todo_body = null);
             await générerListe(listeRecente)
            
@@ -263,6 +328,7 @@ export async function afficherListeRecenteParDefaut() {
 
 // quand l'user n'a pas encore créé de liste, un bouton lui permet de le guider, diff selon mobile ou pc
 export function creationToutePremiereListe() {
+    document.querySelector(".toDoListContainer").innerHTML= msgInfo.msgAucuneListe;
     if (document.querySelector(".maPremiereListe")) {
         // on désactive les clics inutiles tant que l'user n'a pas crée de liste
         interdireLeClickQuandAucuneListe();

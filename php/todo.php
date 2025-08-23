@@ -3,7 +3,7 @@ try {
 
     // 1 - insertion de la nouvelle tâche
 $toDo = json_decode(file_get_contents('php://input'), true);
-$toDoBody = $toDo['todo'];
+$toDoBody = $toDo['todo_body'];
 $toDoTitleId = $toDo['titleId'];
 $toDoDate = date('Y-m-d');
 $sql = new PDO('mysql:host=localhost; dbname=qm; charset=utf8', 'root', '');
