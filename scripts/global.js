@@ -13,10 +13,65 @@ export const msgInfo = {
 }
     
 
+// futur template pour intégrer la POO dans mon code afin d'alléger le contenu et simplifier la création
+export class generateurDeTache {
+    constructor(todo_body, todo_id, status, deadline, liste_id) {
+        this.todo_body = todo_body;
+        this.todo_id = todo_id;
+        this.status = status;
+        this.deadline = deadline;
+        this.liste_id = liste_id;
+    }
+    
+    completion(e) {
+        e.target.dataset.status === 0 ? 1 : 0;
+        e.target.classList.toggle("boxGreen");
+    }
+
+    formaterDeadline(param) {
+        if (!param) { return "Aucune deadline";}
+        return new Intl.DateTimeFormat("fr-FR", {
+            weekday: "long",
+            day: "2-digit",
+            month: "long"
+            }).format(param);
+    }
+    insertionDeLaTacheDansLaListe() {
+        let containerDeTache = document.createElement("li");
+        containerDeTache.classList.add("task");
+        containerDeTache.setAttribute("data-id", this.todo_id);
+        containerDeTache.innerHTML = `
+        <span class="${this.status === 1 ? "box boxGreen" : "box"}" data-status="${this.status}"></span>
+        <textarea class="taskBody" maxlength="50" type="text">${this.todo_body}</textarea>
+        <input type="button" class="deadline" data-id="${this.todo_id}" 
+            data-date-formatted = "${this.deadline}"
+            value="${this.formaterDeadline(this.deadline)}">
+        <i class="fa-regular fa-circle-xmark delete hidden"></i>
+        <i class="fa-solid fa-ellipsis"></i>`;
+        document.querySelector(".toDoListContainer").appendChild(containerDeTache);
+    }
+}
+
+export class generateurdeListe {
+    constructor(liste_titre, liste_id, user_id, tableauDeTaches) {
+        this.liste_titre = liste_titre;
+        this.liste_id = liste_id;
+        this.user_id = user_id;
+        this.tableauDeTaches = tableauDeTaches;
+    }
+    listerLesTaches() {
+        this.tableauDeTaches.forEach(tache => {
+            tache.insertionDeLaTacheDansLaListe();
+        })
+        
+
+        
+    }
+}
+
 // lancement
 connexionOuDeconnexion();
 
-console.log(JSON.parse(window.localStorage.getItem("session")))
 // système de connexion / inscription
 
 export function connexionOuDeconnexion() {
@@ -226,6 +281,7 @@ export async function générerListe(liste) {
 
 // par défaut, questmaker affiche une liste qui est la plus récente
 export async function afficherListeRecenteParDefaut() {
+    console.log(JSON.parse(window.localStorage.getItem("user_id")))
     if (JSON.parse(window.localStorage.getItem("user_id"))!== null) {
         if (JSON.parse(window.localStorage.getItem("liste")) === null) {
             const response = await fetch("./php/listeRecente.php", {
@@ -235,6 +291,7 @@ export async function afficherListeRecenteParDefaut() {
             }) ;
             // on récupère la liste la plus récente
             const listeRecente = await response.json();
+            console.log(listeRecente);
             // s'il n'y a aucune tâche dans la liste
              if (listeRecente.todo_body === null) {
                 document.querySelector(".toDoListContainer").innerHTML = msgInfo.msgAucuneTache;
@@ -251,7 +308,8 @@ export async function afficherListeRecenteParDefaut() {
             }
            
         } else {
-            const listeRecente = JSON.parse(window.localStorage.getItem("liste"))
+            const listeRecente = JSON.parse(window.localStorage.getItem("liste"));
+            console.log(listeRecente);
             !listeRecente[0].todo_body && (listeRecente[0].todo_body = null);
             await générerListe(listeRecente)
            
