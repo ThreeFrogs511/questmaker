@@ -1,6 +1,7 @@
 
+import { semaine, mois, moisChiffre, dateChiffre, msgInfo,  generateurDeTache, generateurdeListe, générerListe, afficherListeRecenteParDefaut, interdireLeClickQuandAucuneListe } from "./global.js"
+
 import {affichageMenuFiltre, systemeDeFiltre, systemeDeTri, ouvertureBarreDeRechercheDeListe, supprimerLaListe} from "./toolbar.js"
-import { semaine, mois, moisChiffre, dateChiffre, msgInfo, générerListe, afficherListeRecenteParDefaut, interdireLeClickQuandAucuneListe } from "./global.js"
 
 
 let taskInput = document.querySelector(".taskInput")
@@ -27,8 +28,6 @@ let idCreationTitreNouvelleListe = null;
 if (document.querySelector(".toDoListContainer")) {
     afficherListeRecenteParDefaut();
     modifierTitreDeListe();
-    ajoutDeTache();
-    validerUneTache();
     supprimerUneTache();
     creationNouvelleListe();
     ouvertureBarreDeRechercheDeListe();
@@ -134,43 +133,18 @@ async function modifierTitreDeListe() {
 
 }
 
-
-function ajoutDeTache() {
-    const user_id = JSON.parse(window.localStorage.getItem("user_id"))
-    if (user_id !== null) {
-        taskInput.addEventListener("keydown", async (event) => {
-            if (event.key === "Enter" && 
-                titleList.value.trim() !== '' && 
-                !document.querySelector(".searchOpen")) {
-                let deadline = null;
-                const response = await fetch("./php/todo.php", {
-                    method: "POST",
-                    headers: {"content-type": "application/json"},
-                    body: JSON.stringify({todo:taskInput.value, titleId: titleList.dataset.id, deadline: deadline, user_id:user_id})
-                })
-                const updatedList = await response.json();
-                 window.localStorage.setItem("liste", JSON.stringify(updatedList[0]));
-                let listeDeTravail = updatedList[0];
-                let task = listeDeTravail[listeDeTravail.length - 1];
-                task.deadline = "Aucune deadline";
-                if (document.querySelector(".toDoListContainer").innerHTML === msgInfo.msgAucuneTache) {
-                document.querySelector(".toDoListContainer").innerHTML = ''
-                    }
-                let taskContainer = document.createElement("li");
-                taskContainer.classList.add("task");
-                taskContainer.setAttribute("data-id", task.todo_id) // on insère l'id unique de la tâche afin de l'identifier plus tard
-                taskContainer.innerHTML = `
-                <span class="box "></span>
-                <textarea class="taskBody" maxlength="50" type="text">${task.todo_body}</textarea>
-                <input type="button" class="deadline" data-id="${task.todo_id}" value="${task.deadline}">
-                <i class="fa-regular fa-circle-xmark delete hidden"></i>
-                <i class="fa-solid fa-ellipsis"></i>`
-                document.querySelector(".toDoListContainer").appendChild(taskContainer);
-                taskInput.value=''
-            }
-        })
-    } 
-}
+// système d'ajout de tâche avec POO
+document.querySelector(".taskInput").addEventListener("keydown", async (e) => {
+    if (e.key === "Enter" && document.querySelector(".titleList").value.trim() !== '' &&
+        document.querySelector(".taskInput").value.trim() !=="") {
+            let todo_body = document.querySelector(".taskInput").value.trim();
+            let liste_id = document.querySelector(".titleList").dataset.id;
+            const user_id = JSON.parse(window.localStorage.getItem("user_id"));
+            let tache = new generateurDeTache(todo_body, 0, null, liste_id, user_id);
+            await tache.envoiTacheVersBDD();
+            tache.insertionDeLaTacheDansLaListe();
+        }
+})
 
 //système pour mettre à jour les tâches
 function modifierUneTache() {
@@ -190,31 +164,32 @@ function modifierUneTache() {
         }})
 }
 
-export function validerUneTache() { 
-    if (currentBoxHandler) {
-         document.querySelector(".toDoListContainer").removeEventListener("click", currentBoxHandler)
+
+// valider ou non une tâche
+document.querySelector(".toDoListContainer").addEventListener("click", async (e) => {
+    if (e.target.classList.contains("box")) {
+        const user_id = JSON.parse(window.localStorage.getItem("user_id"))
+        let todo_id = e.target.closest("li").dataset.id;
+        let liste_id = document.querySelector(".titleList").dataset.id;
+        if (e.target.dataset.status==="0") {
+            e.target.dataset.status=1;
+            e.target.classList.toggle("boxGreen");
+            e.target.nextElementSibling.classList.toggle("taskDone");
+        } else {
+            e.target.dataset.status=0;
+            e.target.classList.toggle("boxGreen");
+            e.target.nextElementSibling.classList.toggle("taskDone");
+        }
+        const response = await fetch("./php/taskStatus.php", {
+                method:"POST",
+                headers:{"content-type": "application/JSON"},
+                body: JSON.stringify({id:todo_id, done: e.target.dataset.status, idTitle:liste_id, userId:user_id})
+            })
+        const feedback = await response.json();
+        window.localStorage.setItem("liste", JSON.stringify(feedback));
     }
-    currentBoxHandler = async function handleClickBox(event) {
-        if (event.target.classList.contains("box")) {
-            event.target.classList.toggle("boxGreen")
-            let taskDone = event.target.parentElement.querySelector(".taskBody")
-            taskDone.classList.toggle("taskDone")
-            let statut = event.target.classList.contains("boxGreen") ? 1 : 0;
-            let idTask = event.target.parentElement.dataset.id
-            let idTitle = titleList.dataset.id;
-            const user_id = JSON.parse(window.localStorage.getItem("user_id"))
-            const response = await fetch("./php/taskStatus.php", {
-                    method:"POST",
-                    headers:{"content-type": "application/JSON"},
-                    body: JSON.stringify({id:idTask, done: statut, idTitle:idTitle, userId:user_id})
-                })
-                const feedback = await response.json();
-                window.localStorage.setItem("liste", JSON.stringify(feedback))
-            }
-        }                
-    document.querySelector(".toDoListContainer").addEventListener("click", currentBoxHandler)
-    
-}
+})
+
 
 
 function supprimerUneTache() {

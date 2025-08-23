@@ -1,5 +1,5 @@
 
-import { msgInfo, moisChiffre, dateChiffre, générerListe, afficherListeRecenteParDefaut, interdireLeClickQuandAucuneListe } from "./global.js"
+import { msgInfo, generateurDeTache, generateurdeListe, moisChiffre, dateChiffre, générerListe, afficherListeRecenteParDefaut, interdireLeClickQuandAucuneListe } from "./global.js"
 
 // l'id unique de l'user
 const user_id = JSON.parse(window.localStorage.getItem("user_id"))
@@ -255,7 +255,8 @@ document.querySelector(".popUpMobile").addEventListener("click", (e) => {
         document.querySelector(".popUpMobile").classList.toggle("popUpMobileOpen");
         document.querySelector("html").classList.contains("no-scroll") && document.querySelector("html").classList.remove("no-scroll");
     } else if (e.target.classList.contains("taskBtn")) {
-        ajoutDeTacheSurMobile(e);
+        // ajoutDeTacheSurMobile(e);
+        ajoutDeTachePOOMobile(e);
     } else if (e.target.classList.contains("btn-deadline-mobile")) {
         let date = new Date(); 
         let dateCompatibleAvecInput = 
@@ -277,46 +278,66 @@ document.querySelector(".popUpMobile").addEventListener("click", (e) => {
 })
 
 // CREATION TACHE :système d'ajout de tâches pour mobile
-async function ajoutDeTacheSurMobile(e) {
-    const user_id = JSON.parse(window.localStorage.getItem("user_id"))
-    if (e.target.classList.contains("taskBtn") && 
-        user_id !== null && 
-        document.querySelector(".titleList").value.trim() !=='' && 
-        document.getElementById("entryField").value.trim() !=='') 
-    {
-        let taskBody = document.getElementById("entryField").value.trim();
-        let deadline = document.querySelector(".btn-deadline-mobile").value;
-        deadline === "Aucune deadline" && (deadline=null);
-        const response = await fetch("./php/todo.php", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify({todo:taskBody, titleId: document.querySelector(".titleList").dataset.id, deadline: deadline, user_id:user_id})
-        })
-        const updatedList = await response.json();
-        if (updatedList[1]) {
-            window.localStorage.setItem("liste", JSON.stringify(updatedList[0]));
-            let listeDeTravail = updatedList[0];
-            let task = listeDeTravail[listeDeTravail.length - 1];
-            deadline ??= task.deadline = "Aucune deadline";
-            document.querySelector(".toDoListContainer").innerHTML === msgInfo.msgAucuneTache && (document.querySelector(".toDoListContainer").innerHTML = '');
-            let taskContainer = document.createElement("li");
-            taskContainer.classList.add("task");
-            taskContainer.setAttribute("data-id", task.todo_id) // on insère l'id unique de la tâche afin de l'identifier plus tard
-            taskContainer.innerHTML = `
-            <span class="box "></span>
-            <textarea class="taskBody" maxlength="50" type="text">${task.todo_body}</textarea>
-            <input type="button" class="deadline" data-id="${task.todo_id}" value="${task.deadline}">
-            <i class="fa-regular fa-circle-xmark delete hidden"></i>
-            <i class="fa-solid fa-ellipsis"></i>`
-            document.querySelector(".toDoListContainer").appendChild(taskContainer);
-            document.getElementById("entryField").value='';
-            document.querySelector(".popUpMobile").classList.toggle("popUpMobileOpen");
-        } else {
-            console.log(updatedList[1]);
-        }
-    }
+// async function ajoutDeTacheSurMobile(e) {
+//     const user_id = JSON.parse(window.localStorage.getItem("user_id"))
+//     if (e.target.classList.contains("taskBtn") && user_id !== null && 
+//         document.querySelector(".titleList").value.trim() !=='' && 
+//         document.getElementById("entryField").value.trim() !=='') 
+//     {
+//         let taskBody = document.getElementById("entryField").value.trim();
+//         let deadline = document.querySelector(".btn-deadline-mobile").value;
+//         deadline === "Aucune deadline" && (deadline=null);
+//         const response = await fetch("./php/todo.php", {
+//             method: "POST",
+//             headers: {"content-type": "application/json"},
+//             body: JSON.stringify({todo_body:taskBody, titleId: document.querySelector(".titleList").dataset.id, deadline: deadline, user_id:user_id})
+//         })
+//         const updatedList = await response.json();
+//         if (updatedList[1]) {
+//             window.localStorage.setItem("liste", JSON.stringify(updatedList[0]));
+//             let listeDeTravail = updatedList[0];
+//             let task = listeDeTravail[listeDeTravail.length - 1];
+//             deadline ??= task.deadline = "Aucune deadline";
+//             document.querySelector(".toDoListContainer").innerHTML === msgInfo.msgAucuneTache && (document.querySelector(".toDoListContainer").innerHTML = '');
+//             let taskContainer = document.createElement("li");
+//             taskContainer.classList.add("task");
+//             taskContainer.setAttribute("data-id", task.todo_id) // on insère l'id unique de la tâche afin de l'identifier plus tard
+//             taskContainer.innerHTML = `
+//             <span class="box "></span>
+//             <textarea class="taskBody" maxlength="50" type="text">${task.todo_body}</textarea>
+//             <input type="button" class="deadline" data-id="${task.todo_id}" value="${task.deadline}">
+//             <i class="fa-regular fa-circle-xmark delete hidden"></i>
+//             <i class="fa-solid fa-ellipsis"></i>`
+//             document.querySelector(".toDoListContainer").appendChild(taskContainer);
+//             document.getElementById("entryField").value='';
+//             document.querySelector(".popUpMobile").classList.toggle("popUpMobileOpen");
+//         } else {
+//             console.log(updatedList[1]);
+//         }
+//     }
            
-}
+// }
+
+async function ajoutDeTachePOOMobile(e) {
+    if (e.target.classList.contains("taskBtn") && user_id !== null && 
+    document.querySelector(".titleList").value.trim() !=='' && 
+    document.getElementById("entryField").value.trim() !=='') {
+        // on récupère les valeurs clés
+        let todo_body = document.getElementById("entryField").value.trim();
+        let liste_id = document.querySelector(".titleList").dataset.id;
+        const user_id = JSON.parse(window.localStorage.getItem("user_id"));
+        let deadline = document.querySelector(".btn-deadline-mobile").value === "Aucune deadline" ? null : document.querySelector(".btn-deadline-mobile").value;
+        // on construit la tâche via le générateur      
+        let tache = new generateurDeTache(todo_body, 0, deadline, liste_id, user_id);
+        // on envoie le tout vers la BDD
+        await tache.envoiTacheVersBDD();
+        // on l'insère dynamiquement dans la li <ul>
+        tache.insertionDeLaTacheDansLaListe();
+        // on reset l'input et on ferme le container dynamique
+        document.getElementById("entryField").value='';
+        document.querySelector(".popUpMobile").classList.toggle("popUpMobileOpen");
+
+}}
 
 // fonction qui permet de modifier et supprimer une tâche en particulier
 async function modifierTacheSurMobile(e) {
