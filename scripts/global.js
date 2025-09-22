@@ -160,8 +160,9 @@ async function inscription() {
            
 
             if (filterSafe) {
+                let cleanEmail = baliseEmail.value.trim();
                 let data = {
-                    email: baliseEmail.value, 
+                    email: cleanEmail.toLowerCase(), 
                     password: balisePassword.value, 
                     nom: baliseNom.value, 
                     prenom: balisePrenom.value
@@ -172,11 +173,17 @@ async function inscription() {
                     body: JSON.stringify(data)
                 })
                 const inscription = await response.json();
-                if (inscription) {
+                
+                if (!inscription.wrongEmail) {
                     signUpBox.innerHTML = `Bienvenue chez nous, ${inscription.prenom} ! Vous allez bientôt être redirigé vers la page de connexion.`;
                     setTimeout(() => {
                         connexion(signUpBox)
+                        // console.log(inscription)
                     }, 2500);
+                } else {
+                    console.log("ce mail existe déjà")
+                    signUpBox.querySelector(".msgErreur").innerHTML += `<p>Erreur : Ce mail existe déjà.</p>`;
+                    filterSafe = false;
                 }
             }
         })
