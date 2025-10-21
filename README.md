@@ -27,13 +27,14 @@ Librairies : Moment.js
 
 📸 Aperçu
 
-![questmaker_auth](screenshot/questmaker_auth.jpg)
-![questmaker_dashboard](screenshot/questmaker_dashboard.jpg)
-![questmaker_deadline_system](screenshot/questmaker_deadline_system.png)
-![questmaker_homepage_nolist](screenshot/questmaker_homepage_nolist.jpg)
-![questmaker_premiere_tache](screenshot/questmaker_premiere_tache.jpg)
-![questmaker_searchbar](screenshot/questmaker_searchbar.png)
-![questmaker_toolbar](screenshot/questmaker_toolbar.png)
+![questmaker_auth](screenshots/questmaker_auth.jpg)
+![questmaker_dashboard](screenshots/questmaker_dashboard.jpg)
+![questmaker_deadline_system](screenshots/questmaker_deadline_system.png)
+![questmaker_homepage_nolist](screenshots/questmaker_homepage_nolist.jpg)
+![questmaker_premiere_tache](screenshots/questmaker_premiere_tache.jpg)
+![questmaker_searchbar](screenshots/questmaker_searchbar.png)
+![questmaker_toolbar](screenshots/questmaker_toolbar.png)
+
 
 
 🎯 Objectifs du projet
