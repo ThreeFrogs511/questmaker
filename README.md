@@ -1,25 +1,42 @@
 # 🌟 QuestMaker
 
-QuestMaker est une application web de type to-do list gamifiée, inspirée de Trello et Notion, avec un thème rétro pixel.
-L’objectif : transformer la gestion de tâches en un système de quêtes, pour rendre la productivité plus ludique.
+QuestMaker is a **gamified web to-do list application**, inspired by Trello and Notion, featuring a **retro pixel theme**.  
+Its goal: to transform task management into a quest system, making productivity more engaging and playful.
 
 ---
 
-## 🚀 Fonctionnalités
+## 🚀 Features
 
-✅ Création, édition et suppression de tâches (habitudes, quêtes journalières, court-terme)
-📅 Gestion des deadlines avec Pikaday (sélecteur de date)
-📊 Suivi de progression via Chart.js
-🔐 Système de connexion/déconnexion (PHP + SQL + localStorage)
-🎨 Thème visuel rétro avec police pixel
+✅ Create, edit, and delete tasks (habits, daily quests, short-term goals)  
+📅 Deadline management using **Pikaday** (date picker)  
+📊 Progress tracking with **Chart.js**  
+🔐 Login/Logout system (**PHP + SQL + localStorage**)  
+🎨 Retro visual theme with pixel-style fonts  
 
 ---
 
-## 🛠️ Stack technique
-Frontend : HTML, CSS, JavaScript
-Backend : PHP, SQL
-Librairies : Moment.js, Pikaday, Chart.js
+## 🛠️ Tech Stack
 
+| Layer       | Technology |
+|--------------|-------------|
+| Frontend     | HTML, CSS, JavaScript |
+| Backend      | PHP, SQL |
+| Libraries    | Moment.js, Pikaday, Chart.js |
+
+---
+
+## 🏗️ Project Structure
+
+```bash
+bdd/ → contains the exported SQL database
+php/ → backend PHP API files (authentication, CRUD operations)
+scripts/ → JavaScript logic (tasks, filters, chart updates, UI behavior)
+styles/ → CSS files for layout and retro styling
+screenshots/ → app previews and demo images
+index.php → main entry point
+dashboard.php → task management dashboard
+profil.php → user profile page
+```
 ---
 
 ## 📸 Aperçu
@@ -34,10 +51,10 @@ Librairies : Moment.js, Pikaday, Chart.js
 
 ---
 
-## 🎯 Objectifs du projet
+## 🎯 Project Goals
 
-Ce projet a été conçu pour :
+This project was designed to:
 
-Approfondir mes compétences en JavaScript, PHP/SQL et manipulation du DOM
-Explorer l’usage de librairies externes (date picker, graphiques, gestion du temps)
-Expérimenter la gamification dans la gestion de tâches
+- Deepen my understanding of **JavaScript**, **PHP/SQL**, and **DOM manipulation**  
+- Explore the integration of **external libraries** (date picker, charts, time management tools)  
+- Experiment with **gamification principles** in task management  
